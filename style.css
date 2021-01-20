@@ -84,6 +84,13 @@ h1 {
     width: 750px;
 }
 
+.result {
+    background-color: #7b3056;
+    color: #fff;
+    text-align: center;
+    width: 750px;
+}
+
 p {
     font-size: 20px;
     text-align: center;

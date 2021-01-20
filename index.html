@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Number Guessing Game</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app-vue.js" defer></script>
 </head>
 <body>
     <h1>Number guessing game</h1>
@@ -13,18 +15,30 @@
     <p>You have 10 attempts to guess the right number.</p>
     </br>
     <div id="wrapper">
-        <form class="form">
-            <label2 for="guessField" id="guess">Guess a number</label>
-            <input type="text" id="guessField" class="guessField">
+        <!-- We use the .prevent to not let the page reload on the submit -->
+        <form class="form" v-on:submit.prevent="checkGuess">
+            <label for="guessField" id="guess">Guess a number</label>
+            <!-- We use the v-model to bind the numGuessed variable with the value of this input -->
+            <input v-model="numGuessed" type="text" id="guessField" class="guessField">
             <input type="submit" id="subt" value="Submit guess" class="guessSubmit">
         </form>
 
         <div class="resultParas">
-            <p >Previous Guesses: <span class="guesses"></span></p>
-            <p >Guesses Remaining: <span class="lastResult">10</span></p>
-            <p class="lowOrHi"></p>
+            <!-- we interpole the guesses variable to get display here -->
+            <p >Previous Guesses: <span class="guesses">{{ guesses }}</span></p>
+            <!-- we interpole the remain variable to get display here -->
+            <p >Guesses Remaining: <span class="lastResult">{{ remain }}</span></p>
+            <div class="lowOrHi"></div>
+            <!-- we interpole the showResult computed method to get display here -->
+                <p class="result" v-show="showMessage">{{ showResult }}</p>
+                <!-- we call the click of the resetGame method -->
+                <div @click="resetGame">
+                    <!-- we set the v-show in false so it doesn't show at the start of the app -->
+                    <p class="result" v-show="!playAgain">Press here to Play Again!</p>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="app.js"></script>
+    <!-- <script src="app.js"></script> -->
 </body>
 </html>
